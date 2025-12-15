@@ -54,3 +54,55 @@ node server.js
 Cas 2 plus PRO: Front séparé avec python (http://localhost:8080)
 cd frontend
 python3 -m http.server 8080
+
+PASSAGE DE SQLITE A MYSQL:
+apt-get install mysql-server (raspberry)
+ou
+apt-get install mariadb-server (linux pc)
+
+mysql_secure_installation
+puis entrer le mot de passe root
+puis faire "n" "n" "y" "n" "y" "y"
+
+créer une DATABASE:
+mysql
+puis:
+CREATE DATABASE nodeapp CHARACTER SET utf8mb4;
+CREATE USER 'jb'@'localhost' IDENTIFIED BY '3929';
+GRANT ALL PRIVILEGES ON nodeapp.* TO 'jb'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+créer une TABLE
+mysql -u jb -p nodeapp
+entrer mode passe utilisateur jb
+puis:
+CREATE TABLE messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  contenu TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+EXIT;
+
+
+installer le driver Mysql sur le projet Node.js
+cd backend
+npm install mysql2
+
+remplacer le fichier /backend/config/db.js
+remplacer le fichier /backend/models/messageModel.js
+remplacer le fichier /backend/controllers/messageController.js
+
+Tester:
+cd backend
+node server.js
+
+curl -X POST http://localhost:3000/api/messages \
+  -H "Content-Type: application/json" \
+  -d '{"contenu":"Message de test"}'
+
+creer les variables d'environnement:
+cd backend
+npm install dotenv
+mousepade .env puis entrer le code
+Attention ne pas mettre localhost mais 127.0.0.1

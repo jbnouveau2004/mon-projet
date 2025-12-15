@@ -1,3 +1,8 @@
+// Installation d dotenv
+require('dotenv').config()
+console.log('DB HOST =', process.env.DB_HOST); // test si ça fonctionne
+// --------------------
+
 const express = require('express');
 const cors = require('cors');
 const messageRoutes = require('./routes/messageRoutes');
@@ -11,9 +16,12 @@ app.use('/api', messageRoutes);
 module.exports = app;
 
 
-const path = require('path');
-app.use(express.static(path.join(__dirname, '../frontend')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
+
+// POUR AFFICHER DANS UNE PAGE WEB
+//const path = require('path');
+//app.use(express.static(path.join(__dirname, '../frontend')));
+
+//app.get('/', (req, res) => {
+//  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+//});
