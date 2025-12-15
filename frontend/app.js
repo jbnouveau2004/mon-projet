@@ -1,4 +1,4 @@
-const API = 'http://localhost:3000/api';
+const API = 'http://192.168.1.108:3000/api';
 
 async function charger() {
   const res = await fetch(`${API}/messages`);

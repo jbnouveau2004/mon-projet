@@ -48,6 +48,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
+cd backend
+node server.js
+
 Cas 2 plus PRO: Front séparé avec python (http://localhost:8080)
 cd frontend
 python3 -m http.server 8080
