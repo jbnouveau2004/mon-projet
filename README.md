@@ -106,3 +106,6 @@ cd backend
 npm install dotenv
 mousepade .env puis entrer le code
 Attention ne pas mettre localhost mais 127.0.0.1
+
+MISE EN PLACE D'UN SYSTEME D'AUTHENTIFICATION
+
