@@ -29,7 +29,7 @@ async function envoyer() {
 charger();
 
 async function charger2() {
-  const res = await fetch(`${API}/stock`);
+  const res = await fetch(`${API}/items`);
   const data = await res.json();
 
   const tbody = document.getElementById('listing');
@@ -48,7 +48,7 @@ async function ajouter() {
   const input4 = document.getElementById('designation');
   const input5 = document.getElementById('quantite');
 
-  await fetch(`${API}/stock`, {
+  await fetch(`${API}/items`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ emplacement: input1.value, reference: input2.value, taille: input3.value, designation: input4.value, quantite: input5.value })

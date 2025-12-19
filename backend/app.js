@@ -9,15 +9,21 @@ const messageRoutes = require('./routes/messageRoutes');
 
 const stockRoutes = require('./routes/stockRoutes');
 
+const itemRoutes = require('./routes/itemRoutes');
+
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+module.exports = app;
 
 app.use('/api', messageRoutes);
 
 app.use('/api', stockRoutes);
 
-module.exports = app;
+app.use('/api', itemRoutes);
+
+
 
 
 

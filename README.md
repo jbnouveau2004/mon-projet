@@ -1,15 +1,16 @@
 mon-projet/
 ├── backend/
+│ ├── .env
 │ ├── app.js
 │ ├── server.js
 │ ├── config/
 │ │ └── db.js
 │ ├── models/
-│ │ └── messageModel.js
+│ │ └── itemModel.js
 │ ├── controllers/
-│ │ └── messageController.js
+│ │ └── itemController.js
 │ ├── routes/
-│ │ └── messageRoutes.js
+│ │ └── itemRoutes.js
 │ └── database.db
 │
 └── frontend/
@@ -17,45 +18,12 @@ mon-projet/
     ├── app.js
     └── style.css
 
-mkdir backend frontend
+mkdir backend frontend etc...
 cd backend
 npm init -y
-npm install express sqlite3 cors
+npm install express cors
 
-création des fichiers et sous-dossier
-
-A changer dans app.js mettre un domaine en production
-const API = 'http://localhost:3000/api';
-
-Pour afficher les messages:
-curl http://localhost:3000/api/messages
-
-Pour ajouter des messages:
-curl -X POST http://localhost:3000/api/messages \
-  -H "Content-Type: application/json" \
-  -d '{"contenu":"Message de test"}'
-
-Cas 1: Ajouter une route pour afficher sur le navigateur la page HTML avec EXPRESS (http://localhost:3000)
-
-backend/app.js à la fin:
-
-Ajouter fichiers statiques:
-const path = require('path');
-app.use(express.static(path.join(__dirname, '../frontend')));
-
-Ajouter une route:
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
-
-cd backend
-node server.js
-
-Cas 2 plus PRO: Front séparé avec python (http://localhost:8080)
-cd frontend
-python3 -m http.server 8080
-
-PASSAGE DE SQLITE A MYSQL:
+Installation MYSQL:
 apt-get install mysql-server (raspberry)
 ou
 apt-get install mariadb-server (linux pc)
@@ -73,43 +41,20 @@ GRANT ALL PRIVILEGES ON nodeapp.* TO 'jb'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 
-créer une TABLE
-mysql -u jb -p nodeapp
-entrer mode passe utilisateur jb
-puis:
-CREATE TABLE messages (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  contenu TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-EXIT;
-
-
 installer le driver Mysql sur le projet Node.js
 cd backend
 npm install mysql2
 
-remplacer le fichier /backend/config/db.js
-remplacer le fichier /backend/models/messageModel.js
-remplacer le fichier /backend/controllers/messageController.js
-
-Tester:
-cd backend
-node server.js
-
-curl -X POST http://localhost:3000/api/messages \
-  -H "Content-Type: application/json" \
-  -d '{"contenu":"Message de test"}'
-
-creer les variables d'environnement:
+installer les variable d'invironnement
 cd backend
 npm install dotenv
-mousepade .env puis entrer le code
-Attention ne pas mettre localhost mais 127.0.0.1
+.env dans backend:
+PORT=3000
+DB_HOST=127.0.0.1 #Ne pas mettre localhost
+DB_USER=jb
+DB_PASSWORD=3929
+DB_NAME=nodeapp
 
-MISE EN PLACE D'UN SYSTEME D'AUTHENTIFICATION
-
-A voir plus tard......................
 
 CRUD stock
 
@@ -148,3 +93,53 @@ FIELDS TERMINATED BY ';'
 ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
+
+****************************************** TEST **************************
+CREATE
+
+curl -X POST http://localhost:3000/api/items \
+  -H "Content-Type: application/json" \
+  -d '{"emplacement":"CIN0000", "reference":"ref", "taille":"test", "designation":"testest", "quantite":"2"}'
+
+READ ALL
+
+curl http://localhost:3000/api/items
+
+READ ONE
+
+curl http://localhost:3000/api/items/1
+
+UPDATE
+
+curl -X PUT http://localhost:3000/api/items/1 \
+  -H "Content-Type: application/json" \
+  -d '{"emplacement":"CIN0000", "reference":"ref", "taille":"test", "designation":"testest", "quantite":"2"}'
+
+DELETE
+
+curl -X DELETE http://localhost:3000/api/items/1
+
+******************************** FIN TEST *********************************
+
+Cas 1: Ajouter une route pour afficher sur le navigateur la page HTML avec EXPRESS (http://localhost:3000)
+
+backend/app.js à la fin:
+
+Ajouter fichiers statiques:
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../frontend')));
+
+Ajouter une route:
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
+
+cd backend
+node server.js
+
+Cas 2 plus PRO: Front séparé avec python (http://localhost:8080)
+cd backend
+node server.js
+
+cd frontend
+python3 -m http.server 8080
