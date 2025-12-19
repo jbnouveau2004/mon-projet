@@ -27,3 +27,39 @@ async function envoyer() {
 }
 
 charger();
+
+async function charger2() {
+  const res = await fetch(`${API}/stock`);
+  const data = await res.json();
+
+  const tbody = document.getElementById('listing');
+  tbody.innerHTML = '';
+  data.forEach(m => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + m.id + '</td><td>' + m.emplacement + '</td><td>' + m.reference + '</td><td>' + m.taille + '</td><td>' + m.designation + '</td><td>' + m.quantite + '</td>';
+    tbody.appendChild(tr);
+  });
+}
+
+async function ajouter() {
+  const input1 = document.getElementById('emplacement');
+  const input2 = document.getElementById('reference');
+  const input3 = document.getElementById('taille');
+  const input4 = document.getElementById('designation');
+  const input5 = document.getElementById('quantite');
+
+  await fetch(`${API}/stock`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ emplacement: input1.value, reference: input2.value, taille: input3.value, designation: input4.value, quantite: input5.value })
+  });
+
+  input1.value = '';
+  input2.value = '';
+  input3.value = '';
+  input4.value = '';
+  input5.value = '';
+  charger2();
+}
+
+charger2();

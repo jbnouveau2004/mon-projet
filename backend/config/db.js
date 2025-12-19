@@ -33,7 +33,7 @@
 
 
 
-//Après l'instazllation de dotenv
+//Après l'installation de dotenv
 const mysql = require('mysql2');
 
 const pool = mysql.createPool({

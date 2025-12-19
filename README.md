@@ -109,3 +109,42 @@ Attention ne pas mettre localhost mais 127.0.0.1
 
 MISE EN PLACE D'UN SYSTEME D'AUTHENTIFICATION
 
+A voir plus tard......................
+
+CRUD stock
+
+CREATE TABLE stock (
+id INT AUTO_INCREMENT PRIMARY KEY,
+emplacement VARCHAR(7) NOT NULL,
+reference VARCHAR(50) NOT NULL,
+taille VARCHAR(50) NOT NULL,
+designation VARCHAR(255) NOT NULL,
+quantite VARCHAR(10) NOT NULL
+);
+
+EXPORTER EN CSV
+
+mysql -u root -p nodeapp
+SELECT * FROM messages INTO OUTFILE '/home/jb/Bureau/fichier.csv' FIELDS TERMINATED BY ',' ENCLOSED BY '' LINES TERMINATED BY '\n';
+
+si pas autorisé à écrire un fichier avec mariadb
+mariadb -u jb -p nodeapp -e "SELECT * FROM messages"   --batch --raw | sed 's/\t/;/g' > fichier.csv
+
+
+
+IMPORTER UN CSV
+
+LOAD DATA INFILE '/tmp/clients.csv'
+INTO TABLE clients
+FIELDS TERMINATED BY ';'
+ENCLOSED BY ''
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+
+si pas autorisé à écrire un fichier avec mariadb
+LOAD DATA LOCAL INFILE '/tmp/clients.csv'
+INTO TABLE clients
+FIELDS TERMINATED BY ';'
+ENCLOSED BY ''
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
