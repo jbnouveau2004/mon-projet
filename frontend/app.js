@@ -36,7 +36,7 @@ async function charger2() {
   tbody.innerHTML = '';
   data.forEach(m => {
     const tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + m.id + '</td><td>' + m.emplacement + '</td><td>' + m.reference + '</td><td>' + m.taille + '</td><td>' + m.designation + '</td><td>' + m.quantite + '</td>';
+    tr.innerHTML = '<td>' + m.id + '</td><td>' + m.emplacement + '</td><td>' + m.reference + '</td><td>' + m.taille + '</td><td>' + m.designation + '</td><td>' + m.quantite + '</td><button onclick="supprimer(' + m.id + ')">Supprimer</button><button onclick="modifier(' + m.id + ')">Modifier</button>';
     tbody.appendChild(tr);
   });
 }
@@ -63,3 +63,89 @@ async function ajouter() {
 }
 
 charger2();
+
+async function supprimer(id){
+    if (!confirm('Supprimmer cet élément ?'))
+    return;
+
+    await fetch(`${API}/items/${id}`, {method: 'DELETE' });
+
+    charger2();
+}
+
+async function modifier(id){
+    const res = await fetch(`${API}/items/${id}`);
+    const item = await res.json();
+
+    document.getElementById('id').style.display = "block";
+    document.getElementById('modifier').style.display = "block";
+    document.getElementById('annuler').style.display = "block";
+    document.getElementById('ajouter').style.display = "none";
+
+    document.getElementById('id').value = item.id;
+    document.getElementById('emplacement').value = item.emplacement;
+    document.getElementById('reference').value = item.reference;
+    document.getElementById('taille').value = item.taille;
+    document.getElementById('designation').value = item.designation;
+    document.getElementById('quantite').value = item.quantite;
+
+}
+
+async function save(){
+    const id = document.getElementById('id').value;
+    const data = {
+        emplacement: document.getElementById('emplacement').value,
+        reference: document.getElementById('reference').value,
+        taille: document.getElementById('taille').value,
+        designation: document.getElementById('designation').value,
+        quantite: document.getElementById('quantite').value
+    };
+    await fetch(`${API}/items/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+
+    document.getElementById('id').style.display = "none";
+    document.getElementById('modifier').style.display = "none";
+    document.getElementById('annuler').style.display = "none";
+    document.getElementById('ajouter').style.display = "block";
+
+    const input1 = document.getElementById('emplacement');
+    const input2 = document.getElementById('reference');
+    const input3 = document.getElementById('taille');
+    const input4 = document.getElementById('designation');
+    const input5 = document.getElementById('quantite');
+
+    input1.value = '';
+    input2.value = '';
+    input3.value = '';
+    input4.value = '';
+    input5.value = '';
+
+    charger2();
+
+}
+
+async function annuler(){
+
+    document.getElementById('id').style.display = "none";
+    document.getElementById('modifier').style.display = "none";
+    document.getElementById('annuler').style.display = "none";
+    document.getElementById('ajouter').style.display = "block";
+
+    const input1 = document.getElementById('emplacement');
+    const input2 = document.getElementById('reference');
+    const input3 = document.getElementById('taille');
+    const input4 = document.getElementById('designation');
+    const input5 = document.getElementById('quantite');
+
+    input1.value = '';
+    input2.value = '';
+    input3.value = '';
+    input4.value = '';
+    input5.value = '';
+
+    charger2();
+
+}

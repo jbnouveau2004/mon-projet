@@ -5,3 +5,7 @@ table{
 #listing tr:nth-of-type(2n){
     background-color: rgb(211, 211, 211);
 }
+
+#id, #modifier, #annuler{
+    display: none;
+}

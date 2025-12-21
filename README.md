@@ -70,7 +70,7 @@ quantite VARCHAR(10) NOT NULL
 EXPORTER EN CSV
 
 mysql -u root -p nodeapp
-SELECT * FROM messages INTO OUTFILE '/home/jb/Bureau/fichier.csv' FIELDS TERMINATED BY ',' ENCLOSED BY '' LINES TERMINATED BY '\n';
+SELECT * FROM messages INTO OUTFILE '/home/jb/Bureau/fichier.csv' FIELDS TERMINATED BY ';' ENCLOSED BY '' LINES TERMINATED BY '\n';
 
 si pas autorisé à écrire un fichier avec mariadb
 mariadb -u jb -p nodeapp -e "SELECT * FROM messages"   --batch --raw | sed 's/\t/;/g' > fichier.csv

@@ -14,12 +14,15 @@
 
 <ul id="liste"></ul>
 
+<input id="id" disabled>
 <input id="emplacement" placeholder="Emplacement">
 <input id="reference" placeholder="Référence">
 <input id="taille" placeholder="Taille/Boitier">
 <input id="designation" placeholder="Désignation">
 <input id="quantite" placeholder="Quantité">
-<button onclick="ajouter()">Ajouter</button>
+<button onclick="ajouter()" id="ajouter">Ajouter</button>
+<button onclick="save()" id="modifier">Modifier</button>
+<button onclick="annuler()" id="annuler">Annuler</button>
 
 <table>
     <thead>
