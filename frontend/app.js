@@ -149,3 +149,27 @@ async function annuler(){
     charger2();
 
 }
+
+
+async function rechercher() {
+  const input = document.getElementById('search').value;
+
+  if (!input) {
+    charger2();
+    return;
+  }
+
+  const res = await fetch(`${API}/items/search?q=${encodeURIComponent(input)}`);
+  const items = await res.json();
+
+  const tbody = document.getElementById('listing');
+  tbody.innerHTML = '';
+  items.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + item.id + '</td><td>' + item.emplacement + '</td><td>' + item.reference + '</td><td>' + item.taille + '</td><td>' + item.designation + '</td><td>' + item.quantite + '</td><button onclick="supprimer(' + item.id + ')">Supprimer</button><button onclick="modifier(' + item.id + ')">Modifier</button>';
+    tbody.appendChild(tr);
+  });
+
+  input.value = '';
+
+}

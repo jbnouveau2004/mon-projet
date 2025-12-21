@@ -105,6 +105,10 @@ READ ALL
 
 curl http://localhost:3000/api/items
 
+READ SEARCH
+
+curl http://localhost:3000/api/items/search?q=mot
+
 READ ONE
 
 curl http://localhost:3000/api/items/1

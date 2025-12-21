@@ -9,6 +9,18 @@ exports.getAll = async (req, res) => {
   }
 };
 
+exports.getSearch = async (req, res) => {
+  try {
+    const q = req.query.q;
+    if (!q) return res.json([]);
+
+    const results = await Item.findSearch(q);
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 exports.getOne = async (req, res) => {
   try {
     const item = await Item.findById(req.params.id);

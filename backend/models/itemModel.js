@@ -19,6 +19,20 @@ exports.findAll = async () => {
   return rows;
 };
 
+exports.findSearch = async (keyword) => {
+  const like = `%${keyword}%`;
+  const [rows] = await db.query(
+    `SELECT * FROM stock
+    WHERE emplacement LIKE ?
+    OR reference LIKE ?
+    OR taille LIKE ?
+    OR designation LIKE ?
+    ORDER BY id DESC`,
+    [like, like, like, like]
+  );
+  return rows;
+};
+
 exports.findById = async (id) => {
   const [rows] = await db.query(
     'SELECT * FROM stock WHERE id = ?',
