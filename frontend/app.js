@@ -1,34 +1,6 @@
 const API = 'http://192.168.1.108:3000/api';
 
 async function charger() {
-  const res = await fetch(`${API}/messages`);
-  const data = await res.json();
-
-  const ul = document.getElementById('liste');
-  ul.innerHTML = '';
-  data.forEach(m => {
-    const li = document.createElement('li');
-    li.textContent = m.contenu;
-    ul.appendChild(li);
-  });
-}
-
-async function envoyer() {
-  const input = document.getElementById('message');
-
-  await fetch(`${API}/messages`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ contenu: input.value })
-  });
-
-  input.value = '';
-  charger();
-}
-
-charger();
-
-async function charger2() {
   const res = await fetch(`${API}/items`);
   const data = await res.json();
 
@@ -59,10 +31,10 @@ async function ajouter() {
   input3.value = '';
   input4.value = '';
   input5.value = '';
-  charger2();
+  charger();
 }
 
-charger2();
+charger();
 
 async function supprimer(id){
     if (!confirm('Supprimmer cet élément ?'))
@@ -70,7 +42,7 @@ async function supprimer(id){
 
     await fetch(`${API}/items/${id}`, {method: 'DELETE' });
 
-    charger2();
+    charger();
 }
 
 async function modifier(id){
@@ -123,7 +95,7 @@ async function save(){
     input4.value = '';
     input5.value = '';
 
-    charger2();
+    charger();
 
 }
 
@@ -146,7 +118,7 @@ async function annuler(){
     input4.value = '';
     input5.value = '';
 
-    charger2();
+    charger();
 
 }
 
@@ -155,7 +127,7 @@ async function rechercher() {
   const input = document.getElementById('search').value;
 
   if (!input) {
-    charger2();
+    charger();
     return;
   }
 

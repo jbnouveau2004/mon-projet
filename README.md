@@ -94,6 +94,30 @@ ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
+
+Cas 1: Ajouter une route pour afficher sur le navigateur la page HTML avec EXPRESS (http://localhost:3000)
+
+backend/app.js à la fin:
+
+Ajouter fichiers statiques:
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../frontend')));
+
+Ajouter une route:
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
+
+cd backend
+node server.js
+
+Cas 2 plus PRO: Front séparé avec python (http://localhost:8080)
+cd backend
+node server.js
+
+cd frontend
+python3 -m http.server 8080
+
 ****************************************** TEST **************************
 CREATE
 
@@ -124,26 +148,3 @@ DELETE
 curl -X DELETE http://localhost:3000/api/items/1
 
 ******************************** FIN TEST *********************************
-
-Cas 1: Ajouter une route pour afficher sur le navigateur la page HTML avec EXPRESS (http://localhost:3000)
-
-backend/app.js à la fin:
-
-Ajouter fichiers statiques:
-const path = require('path');
-app.use(express.static(path.join(__dirname, '../frontend')));
-
-Ajouter une route:
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
-
-cd backend
-node server.js
-
-Cas 2 plus PRO: Front séparé avec python (http://localhost:8080)
-cd backend
-node server.js
-
-cd frontend
-python3 -m http.server 8080
