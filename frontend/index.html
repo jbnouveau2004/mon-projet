@@ -3,44 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <title>Front MVC</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Frontend séparé</h1>
+<section class="container">
+    <h1>Gestionnaire de stock</h1>
 
-<input id="search">
-<button onclick="rechercher()">Rechercher</button>
+    <input id="search" placeholder="Mot-clé">
+    <button onclick="rechercher()" class="btn btn-primary">Rechercher</button>
 
-<ul id="liste"></ul>
+    <ul id="liste"></ul>
 
-<input id="id" disabled>
-<input id="emplacement" placeholder="Emplacement">
-<input id="reference" placeholder="Référence">
-<input id="taille" placeholder="Taille/Boitier">
-<input id="designation" placeholder="Désignation">
-<input id="quantite" placeholder="Quantité">
-<button onclick="ajouter()" id="ajouter">Ajouter</button>
-<button onclick="save()" id="modifier">Modifier</button>
-<button onclick="annuler()" id="annuler">Annuler</button>
+    <div class="formulaire">
+        <input id="id" disabled>
+        <input id="emplacement" placeholder="Emplacement" maxlength="7">
+        <input id="reference" placeholder="Référence" maxlength="50">
+        <input id="taille" placeholder="Taille/Boitier" maxlength="50">
+        <input id="designation" placeholder="Désignation" maxlength="255">
+        <input id="quantite" placeholder="Quantité" type="number">
+        <button onclick="ajouter()" id="ajouter" class="btn btn-primary">Ajouter un élément</button>
+        <button onclick="save()" id="modifier" class="btn btn-primary">Modifier cet élément</button>
+        <button onclick="annuler()" id="annuler" class="btn btn-primary">Annuler la modification de cet élément</button>
+    </div>
 
-<table>
-    <thead>
-        <tr>
-            <th>id</th>
-            <th>Emplacement</th>
-            <th>Référence</th>
-            <th>Taille/Boitier</th>
-            <th>Désignation</th>
-            <th>Quantité</th>
-        </tr>
-    </thead>
-    <tbody id="listing">
+    <hr>
 
-    </tbody>
-    <tfoot>
-    </tfoot>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Emplacement</th>
+                <th>Référence</th>
+                <th>Taille/Boitier</th>
+                <th>Désignation</th>
+                <th>Quantité</th>
+            </tr>
+        </thead>
+        <tbody id="listing">
+
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+
+</section>
 
 <script src="app.js"></script>
 </body>

@@ -8,7 +8,7 @@ async function charger() {
   tbody.innerHTML = '';
   data.forEach(m => {
     const tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + m.id + '</td><td>' + m.emplacement + '</td><td>' + m.reference + '</td><td>' + m.taille + '</td><td>' + m.designation + '</td><td>' + m.quantite + '</td><button onclick="supprimer(' + m.id + ')">Supprimer</button><button onclick="modifier(' + m.id + ')">Modifier</button>';
+    tr.innerHTML = '<td>' + m.id + '</td><td>' + m.emplacement + '</td><td>' + m.reference + '</td><td>' + m.taille + '</td><td>' + m.designation + '</td><td>' + m.quantite + '</td><button class="btn btn-danger" onclick="supprimer(' + m.id + ')">X</button><button class="btn btn-warning" onclick="modifier(' + m.id + ')">Modifier</button>';
     tbody.appendChild(tr);
   });
 }
