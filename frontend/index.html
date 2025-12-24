@@ -9,47 +9,51 @@
 </head>
 <body>
 
-<section class="container">
-    <h1>Gestionnaire de stock</h1>
+    <div id="overlay_back" class=""></div>
 
-    <input id="search" placeholder="Mot-clé">
-    <button onclick="rechercher()" class="btn btn-primary">Rechercher</button>
+    <section id="haut" class="container">
+        <h1>Gestionnaire de stock</h1>
 
-    <ul id="liste"></ul>
+        <input id="search" placeholder="Mot-clé">
+        <button onclick="rechercher()" class="btn btn-primary">Rechercher</button>
 
-    <div class="formulaire">
-        <input id="id" disabled>
-        <input id="emplacement" placeholder="Emplacement" maxlength="7">
-        <input id="reference" placeholder="Référence" maxlength="50">
-        <input id="taille" placeholder="Taille/Boitier" maxlength="50">
-        <input id="designation" placeholder="Désignation" maxlength="255">
-        <input id="quantite" placeholder="Quantité" type="number">
-        <button onclick="ajouter()" id="ajouter" class="btn btn-primary">Ajouter un élément</button>
-        <button onclick="save()" id="modifier" class="btn btn-primary">Modifier cet élément</button>
-        <button onclick="annuler()" id="annuler" class="btn btn-primary">Annuler la modification de cet élément</button>
-    </div>
+        <div id="overlay_front" class="formulaire">
+            <input id="id" disabled>
+            <input id="emplacement" placeholder="Emplacement" maxlength="7">
+            <input id="reference" placeholder="Référence" maxlength="50">
+            <input id="taille" placeholder="Taille/Boitier" maxlength="50">
+            <input id="designation" placeholder="Désignation" maxlength="255">
+            <input id="quantite" placeholder="Quantité" type="number">
+            <button onclick="ajouter()" id="ajouter" class="btn btn-primary">Ajouter un élément</button>
+            <button onclick="save()" id="modifier" class="btn btn-primary">Modifier cet élément</button>
+            <button onclick="annuler()" id="annuler" class="btn btn-primary">Annuler la modification de cet élément</button>
+        </div>
 
-    <hr>
+        <hr>
 
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>Emplacement</th>
-                <th>Référence</th>
-                <th>Taille/Boitier</th>
-                <th>Désignation</th>
-                <th>Quantité</th>
-            </tr>
-        </thead>
-        <tbody id="listing">
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Emplacement</th>
+                    <th>Référence</th>
+                    <th>Taille/Boitier</th>
+                    <th>Désignation</th>
+                    <th>Quantité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="listing">
 
-        </tbody>
-        <tfoot>
-        </tfoot>
-    </table>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
 
-</section>
+    </section>
+
+    <a href="#haut" id="fleche">^</a>
+
 
 <script src="app.js"></script>
 </body>

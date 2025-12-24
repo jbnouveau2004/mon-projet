@@ -54,6 +54,9 @@ async function modifier(id){
     document.getElementById('annuler').style.display = "block";
     document.getElementById('ajouter').style.display = "none";
 
+    document.querySelector('#overlay_back').classList.add("overlay_back");
+    document.querySelector('#overlay_front').classList.add("overlay_front");
+
     document.getElementById('id').value = item.id;
     document.getElementById('emplacement').value = item.emplacement;
     document.getElementById('reference').value = item.reference;
@@ -83,6 +86,9 @@ async function save(){
     document.getElementById('annuler').style.display = "none";
     document.getElementById('ajouter').style.display = "block";
 
+    document.querySelector('#overlay_back').classList.remove("overlay_back");
+    document.querySelector('#overlay_front').classList.remove("overlay_front");
+
     const input1 = document.getElementById('emplacement');
     const input2 = document.getElementById('reference');
     const input3 = document.getElementById('taille');
@@ -105,6 +111,9 @@ async function annuler(){
     document.getElementById('modifier').style.display = "none";
     document.getElementById('annuler').style.display = "none";
     document.getElementById('ajouter').style.display = "block";
+
+    document.querySelector('#overlay_back').classList.remove("overlay_back");
+    document.querySelector('#overlay_front').classList.remove("overlay_front");
 
     const input1 = document.getElementById('emplacement');
     const input2 = document.getElementById('reference');
@@ -138,7 +147,7 @@ async function rechercher() {
   tbody.innerHTML = '';
   items.forEach(item => {
     const tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + item.id + '</td><td>' + item.emplacement + '</td><td>' + item.reference + '</td><td>' + item.taille + '</td><td>' + item.designation + '</td><td>' + item.quantite + '</td><button onclick="supprimer(' + item.id + ')">Supprimer</button><button onclick="modifier(' + item.id + ')">Modifier</button>';
+    tr.innerHTML = '<td>' + item.id + '</td><td>' + item.emplacement + '</td><td>' + item.reference + '</td><td>' + item.taille + '</td><td>' + item.designation + '</td><td>' + item.quantite + '</td><td><button onclick="supprimer(' + item.id + ')">Supprimer</button><button onclick="modifier(' + item.id + ')">Modifier</button></td>';
     tbody.appendChild(tr);
   });
 
