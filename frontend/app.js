@@ -147,7 +147,7 @@ async function rechercher() {
   tbody.innerHTML = '';
   items.forEach(item => {
     const tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + item.id + '</td><td>' + item.emplacement + '</td><td>' + item.reference + '</td><td>' + item.taille + '</td><td>' + item.designation + '</td><td>' + item.quantite + '</td><td><button onclick="supprimer(' + item.id + ')">Supprimer</button><button onclick="modifier(' + item.id + ')">Modifier</button></td>';
+    tr.innerHTML = '<td>' + item.id + '</td><td>' + item.emplacement + '</td><td>' + item.reference + '</td><td>' + item.taille + '</td><td>' + item.designation + '</td><td>' + item.quantite + '</td><td><button class="btn btn-danger" onclick="supprimer(' + item.id + ')">Supprimer</button><button class="btn btn-warning" onclick="modifier(' + item.id + ')">Modifier</button></td>';
     tbody.appendChild(tr);
   });
 
